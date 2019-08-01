@@ -27,6 +27,8 @@ public class Window {
         frame = new JFrame("Report Constructor v1");
         frame.setPreferredSize(new Dimension(400,200));
         // handle window close
+        ImageIcon img = new ImageIcon(System.getProperty("user.dir") +"\\src\\main\\resources\\apple-touch-icon.png");
+
 
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -42,11 +44,14 @@ public class Window {
 
 
         // display
+
         frame.getContentPane().add(panel1);
+        frame.setIconImage(img.getImage());
         frame.pack();
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
     }
 
     private static void mainView(JPanel panel) {
