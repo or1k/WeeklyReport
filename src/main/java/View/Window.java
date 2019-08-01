@@ -23,7 +23,7 @@ public class Window {
     public static JRadioButton jRadioButton3;
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         frame = new JFrame("Report Constructor v1");
         frame.setPreferredSize(new Dimension(400,200));
         // handle window close
@@ -49,7 +49,7 @@ public class Window {
         frame.setVisible(true);
     }
 
-    private static void mainView(JPanel panel) throws IOException {
+    private static void mainView(JPanel panel) {
         panel.setLayout(null);
 
         JLabel h1 = new JLabel("Enter in JIRA account");
@@ -63,8 +63,11 @@ public class Window {
         userText = new JTextField(20);
         userText.setBounds(200, 50, 160, 25);
         panel.add(userText);
-        userText.setText(Settings.profile());
-
+        try {
+            userText.setText(Settings.profile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         passwordLabel.setBounds(10, 80, 80, 25);
@@ -109,11 +112,9 @@ public class Window {
 
             if(passwordText.getPassword().length < 2){
                 passwordLabel.setForeground(Color.RED);
-                System.out.println("kek");
                 return;
             }
             else {
-                System.out.println("mi tyt");
                 passwordLabel.setForeground(Color.BLACK);
             }
             loginButton = (JButton) e.getSource();
