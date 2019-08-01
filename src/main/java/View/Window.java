@@ -66,7 +66,7 @@ public class Window {
         try {
             userText.setText(Settings.profile());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
 
@@ -125,6 +125,7 @@ public class Window {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+
 
         }
     }

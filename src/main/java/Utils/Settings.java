@@ -14,10 +14,11 @@ public class Settings {
         if(f.exists() && f.isFile()) {
             FileReader fr= new FileReader(System.getProperty("user.dir") + "/profile/users.txt");
             Scanner scan = new Scanner(fr);
-           return scan.nextLine();
-        }else{
-            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(System.getProperty("user.dir") + "/profile/users.txt", false), StandardCharsets.UTF_8);
+           return scan.next();
         }
+//        else{
+//            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(System.getProperty("user.dir") + "/profile/users.txt", false), StandardCharsets.UTF_8);
+//        }
         return null;
     }
 
