@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite verbose="10" name="WeeklyReport" configfailurepolicy="continue">
-<test name="WeeklyReport">
-    <classes>
-<!--        <class name="ReportConstructor.Testtest"/>-->
-    </classes>
-</test>
-</suite>

@@ -1,20 +1,19 @@
 package View;
 
 import ReportConstructor.BaseTest;
-import ReportConstructor.Testtest;
-import com.codeborne.selenide.impl.CollectionElement;
-import org.testng.annotations.Test;
+import Utils.Settings;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 public class Window {
     public static JTextField userText;
     public static JPasswordField passwordText;
     public static JButton loginButton = new JButton("login");
     public static JButton exitButton = new JButton("exit");
-    public static JLabel userLabel = new JLabel("User");
+    public static JLabel userLabel = new JLabel("Email");
     public static JLabel passwordLabel = new JLabel("Password");
 
     public static JFrame frame;
@@ -24,7 +23,7 @@ public class Window {
     public static JRadioButton jRadioButton3;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         frame = new JFrame("Report Constructor v1");
         frame.setPreferredSize(new Dimension(400,200));
         // handle window close
@@ -50,7 +49,7 @@ public class Window {
         frame.setVisible(true);
     }
 
-    private static void mainView(JPanel panel) {
+    private static void mainView(JPanel panel) throws IOException {
         panel.setLayout(null);
 
         JLabel h1 = new JLabel("Enter in JIRA account");
@@ -64,6 +63,8 @@ public class Window {
         userText = new JTextField(20);
         userText.setBounds(200, 50, 160, 25);
         panel.add(userText);
+        userText.setText(Settings.profile());
+
 
 
         passwordLabel.setBounds(10, 80, 80, 25);
@@ -93,26 +94,6 @@ public class Window {
 
     }
 
-//
-
-//    public static class ActionListenerSaveReport extends Component implements ActionListener{
-//        public void actionPerformed(ActionEvent e)
-//        {
-//            if (e.getSource() == btnBrowse)
-//            {
-//                final JFileChooser chooser = new JFileChooser(new File("C:\\")); //Downloads Directory as default
-//                chooser.setDialogTitle("Select Location");
-//                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//                chooser.setAcceptAllFileFilterUsed(true);
-//
-//                if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
-//                {
-//                    filePath = chooser.getSelectedFile().getPath();
-//                    path.setText(filePath);
-//                }
-//            }
-//        }
-//    }
 
     public static class ActionListenerForGeo implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -126,15 +107,24 @@ public class Window {
             //TODO
             // Сделать провернку пароля
 
-//            if( ){
-//                passwordLabel.setForeground(Color.RED);
-//                return;
-//            }else {
-//                userLabel.setForeground(Color.BLACK);
-//            }
+            if(passwordText.getPassword().length < 2){
+                passwordLabel.setForeground(Color.RED);
+                System.out.println("kek");
+                return;
+            }
+            else {
+                System.out.println("mi tyt");
+                passwordLabel.setForeground(Color.BLACK);
+            }
             loginButton = (JButton) e.getSource();
+            JOptionPane.showMessageDialog(loginButton,  "СТАРТУЕМ!!!!!");
             frame.dispose();
-            BaseTest.createReport();
+            try {
+                BaseTest.createReport();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
         }
     }
 
@@ -147,5 +137,7 @@ public class Window {
 
         }
     }
+
+
 
 }
