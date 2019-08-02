@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.EventListener;
 
 public class Window {
     public static JTextField userText;
@@ -81,6 +82,30 @@ public class Window {
         passwordText = new JPasswordField(20);
         passwordText.setBounds(200, 80, 160, 25);
         panel.add(passwordText);
+        passwordText.addKeyListener(new KeyListener(){
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+                    frame.dispose();
+                    try {
+                        BaseTest.createReport();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                //Do Nothing
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                //Do Nothing
+            }
+
+        });
 
 //        linkText = new JTextField(20);
 //        linkText.setBounds(200, 70, 160, 25);
@@ -94,7 +119,7 @@ public class Window {
 
         loginButton.setBounds(10, 120, 80, 25);
         panel.add(loginButton);
-        loginButton.addActionListener(new Window.ActionListenerForGeo());
+        loginButton.addActionListener(new Window.LoginPressed());
 
         exitButton.setBounds(280, 120, 80, 25);
         panel.add(exitButton);
@@ -102,8 +127,22 @@ public class Window {
 
     }
 
+    public static class KeyPressedInPassword implements EventListener {
 
-    public static class ActionListenerForGeo implements ActionListener {
+        public void actionPerformed(KeyEvent e) {
+            if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+                frame.dispose();
+                try {
+                    BaseTest.createReport();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    public static class LoginPressed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(userText.getText().equals("")){
                 userLabel.setForeground(Color.RED);
@@ -112,8 +151,6 @@ public class Window {
                 userLabel.setForeground(Color.BLACK);
             }
 
-            //TODO
-            // Сделать провернку пароля
 
             if(passwordText.getPassword().length < 2){
                 passwordLabel.setForeground(Color.RED);
