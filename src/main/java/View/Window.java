@@ -13,9 +13,12 @@ public class Window {
     public static JTextField userText;
     public static JPasswordField passwordText;
     public static JButton loginButton = new JButton("login");
+    public static JButton updateButton = new JButton("Check update");
     public static JButton exitButton = new JButton("exit");
     public static JLabel userLabel = new JLabel("Email");
     public static JLabel passwordLabel = new JLabel("Password");
+    public static String version = "v";
+    public static int numberVersion = 1;
 
     public static JFrame frame;
 
@@ -25,7 +28,7 @@ public class Window {
 
 
     public static void main(String[] args) {
-        frame = new JFrame("Report Constructor v1");
+        frame = new JFrame("Weekly report " + version+numberVersion);
         frame.setPreferredSize(new Dimension(400,200));
         // handle window close
         ImageIcon img = new ImageIcon(System.getProperty("user.dir") +"\\src\\main\\resources\\apple-touch-icon.png");
@@ -121,6 +124,10 @@ public class Window {
         panel.add(loginButton);
         loginButton.addActionListener(new Window.LoginPressed());
 
+        updateButton.setBounds(125, 120, 120, 25);
+        panel.add(updateButton);
+        updateButton.addActionListener(new Window.UpdateChecker());
+
         exitButton.setBounds(280, 120, 80, 25);
         panel.add(exitButton);
         exitButton.addActionListener(new Window.ExitActionListener());
@@ -169,6 +176,16 @@ public class Window {
             }
 
 
+        }
+    }
+
+    public static class UpdateChecker implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            try {
+                Settings.checkUpdate();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

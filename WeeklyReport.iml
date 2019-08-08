@@ -60,5 +60,6 @@
     <orderEntry type="library" name="Maven: org.apache-extras.beanshell:bsh:2.0b6" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20180813" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.7" level="project" />
+    <orderEntry type="library" name="Maven: or1oN:FirstJavaFXProject:1.0-SNAPSHOT" level="project" />
   </component>
 </module>

@@ -1,13 +1,22 @@
 package Utils;
 
 import View.Window;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+
 
 public class Settings {
 
+    private static final String USER_AGENT =
+            "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
 
     public static String profile() throws IOException {
         File f = new File(System.getProperty("user.dir") + "/profile/users.txt");
@@ -24,6 +33,29 @@ public class Settings {
         writer.write(Window.userText.getText());
         writer.append('\n');
         writer.flush();
+    }
+
+    public static String getDateRange(){
+        LocalDate date = LocalDate.now();
+        LocalDate minusWeek = LocalDate.now().minusDays(4);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM");
+        String startDay = minusWeek.format(formatter);
+        String endDay = date.format(formatter);
+
+    return startDay + " по " + endDay;
+    }
+
+    public static void checkUpdate() throws IOException {
+        System.out.println(Window.numberVersion+1);
+        String url = "https://github.com/or1k/WeeklyReport/releases/tag/" + Window.version + (Window.numberVersion+1);
+        Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
+        Document htmlDocument = connection.get();
+        if(connection.response().statusCode() == 200){
+            System.out.println("Have new Update");// 200 is the HTTP OK status code
+        }else{
+            System.out.println(connection.response().statusCode());
+            System.out.println("GAVNO");
+        }
     }
 
 }

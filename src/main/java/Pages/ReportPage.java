@@ -1,5 +1,6 @@
 package Pages;
 
+import Utils.Settings;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -46,8 +47,8 @@ public class ReportPage {
 
         // get all the set of keys
         Set<String> keys = m.keySet();
-        try { OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("WeeklyReport.txt", true), StandardCharsets.UTF_8);
-            writer.write("Отчет по затраченному времени");
+        try { OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("WeeklyReport.txt", false), StandardCharsets.UTF_8);
+            writer.write("Отчет по затраченному времени за период с " + Settings.getDateRange());
             writer.append('\n');
 
             for (Object key : keys) {
