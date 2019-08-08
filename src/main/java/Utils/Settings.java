@@ -16,9 +16,6 @@ public class Settings {
             Scanner scan = new Scanner(fr);
            return scan.next();
         }
-//        else{
-//            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(System.getProperty("user.dir") + "/profile/users.txt", false), StandardCharsets.UTF_8);
-//        }
         return null;
     }
 
@@ -29,23 +26,4 @@ public class Settings {
         writer.flush();
     }
 
-//    public static boolean checkLogininProfile() throws FileNotFoundException {
-//        File f = new File("/profile/users.txt");
-//        if(f.exists() && f.isFile()) {
-//            return true;
-//
-//        }
-//        return false;
-//    }
-//
-//    public static String getLogin() throws FileNotFoundException {
-//        File f = new File("/profile/users.txt");
-//        if (f.exists() && f.isFile()) {
-//            FileReader fr = new FileReader(System.getProperty("user.dir") + "/profile/users.txt");
-//            Scanner scan = new Scanner(fr);
-//            return scan.nextLine();
-//        }else{
-//
-//        }
-//    }
 }

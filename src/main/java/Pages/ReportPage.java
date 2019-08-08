@@ -47,10 +47,10 @@ public class ReportPage {
         // get all the set of keys
         Set<String> keys = m.keySet();
         try { OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("WeeklyReport.txt", true), StandardCharsets.UTF_8);
-
+            writer.write("Отчет по затраченному времени");
+            writer.append('\n');
 
             for (Object key : keys) {
-
                 writer.write(key + " - " + m.get(key) + " " +totalTimeforTask(key));
                 writer.append('\n');
             }
@@ -92,86 +92,6 @@ public class ReportPage {
         return String.format("%d:%02d", h, m);
     }
 
-
-
-//    public void getReport(){
-//        try {
-//            $(By.xpath("//h1[text() = 'System Dashboard']")).waitUntil(Condition.visible, 5000);
-//            open(urlMyWork);
-//            switchTo().frame(0);
-//            $(By.xpath("//button[contains(text(), 'Submit period')]")).waitUntil(Condition.visible, 10000);
-//        }catch (AssertionError ex){
-//            open(urlMyWork);
-//            switchTo().frame(0);
-//            $(By.xpath("//button[contains(text(), 'Submit period')]")).waitUntil(Condition.visible, 10000);
-//        }
-//        sleep(1500);
-//        ElementsCollection numbersOfTask = $$(By.xpath("//div[@data-type = 'WORKLOG']//span[contains(@title, 'FE1')]"));
-//
-//        ElementsCollection titleTask = $$(By.xpath("//div[@data-type = 'WORKLOG']//div/div[@name = 'tempoCardComment']"));
-//        SelenideElement totalTime = $(By.xpath("//*[@id=\"tempo-container\"]/div/div/div[2]/div[2]/div[2]/div/div/div[2]"));
-//
-//        try { FileWriter writer = new FileWriter("notes3.txt", false);
-//
-//
-//            for (int i = 0; i < numbersOfTask.size(); i++) {
-//
-//                writer.write(numbersOfTask.get(i).getText() + " - " + titleTask.get(i).getAttribute("title"));
-//                writer.append('\n');
-//            }
-//            writer.write("Total hours : " + totalTime.getText());
-//
-//            writer.flush();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//
-//    public void getReportWithComments(){
-//        try {
-//            $(By.xpath("//h1[text() = 'System Dashboard']")).waitUntil(Condition.visible, 5000);
-//            open(urlMyWork);
-//            switchTo().frame(0);
-//            $(By.xpath("//button[contains(text(), 'Submit period')]")).waitUntil(Condition.visible, 10000);
-//        }catch (AssertionError ex){
-//            open(urlMyWork);
-//            switchTo().frame(0);
-//            $(By.xpath("//button[contains(text(), 'Submit period')]")).waitUntil(Condition.visible, 10000);
-//        }
-//        sleep(1500);
-//
-//        ElementsCollection numbersOfTask = $$(By.xpath("//div[@data-type = 'WORKLOG']//span[contains(@title, 'FE1')]"));
-//        ElementsCollection titleTask = $$(By.xpath("//div[@data-type = 'WORKLOG']//div/div[@name = 'tempoCardComment']"));
-//        SelenideElement totalTime = $(By.xpath("//*[@id=\"tempo-container\"]/div/div/div[2]/div[2]/div[2]/div/div/div[2]"));
-//
-//        Multimap<String, String> multiMap = ArrayListMultimap.create();
-//        for(int i=0;i<numbersOfTask.size();i++){
-//            multiMap.put(numbersOfTask.get(i).getText(), titleTask.get(i).getAttribute("title"));
-//        }
-//
-//        // get all the set of keys
-//        Set<String> keys = multiMap.keySet();
-//        // iterate through the key set and display key and values
-//
-//
-//        try { OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("reportWithComments.txt", true), StandardCharsets.UTF_8);
-//
-//
-//            for (String key : keys) {
-//                writer.write(key + " - " + multiMap.get(key));
-//                writer.append('\n');
-//            }
-//
-//            writer.write("Total hours : " + totalTime.getText());
-//
-//            writer.flush();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 
 }
