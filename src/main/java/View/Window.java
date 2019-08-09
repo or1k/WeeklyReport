@@ -3,7 +3,6 @@ package View;
 import ReportConstructor.BaseTest;
 
 import DownloadUtils.DownloadWithBar;
-import Utils.DownloadFile;
 import Utils.Settings;
 
 import javax.swing.*;
