@@ -1,35 +1,39 @@
 package View;
 
 import ReportConstructor.BaseTest;
+
+import DownloadUtils.DownloadWithBar;
+import Utils.DownloadFile;
 import Utils.Settings;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.EventListener;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 public class Window {
+
+
     public static JTextField userText;
     public static JPasswordField passwordText;
+    public static JProgressBar j ;
     public static JButton loginButton = new JButton("login");
-    public static JButton updateButton = new JButton("Check update");
+    public static JButton installUpdate = new JButton("Install update?");
+    public static JButton updateButton = new JButton("No update now");
     public static JButton exitButton = new JButton("exit");
     public static JLabel userLabel = new JLabel("Email");
     public static JLabel passwordLabel = new JLabel("Password");
-    public static String version = "v";
-    public static int numberVersion = 1;
+    public static int numberVersion = 2;
 
     public static JFrame frame;
 
-    public static JRadioButton jRadioButton1;
-    public static JRadioButton jRadioButton2;
-    public static JRadioButton jRadioButton3;
 
-
-    public static void main(String[] args) {
-        frame = new JFrame("Weekly report " + version+numberVersion);
-        frame.setPreferredSize(new Dimension(400,200));
+    public static void main(String[] args) throws IOException {
+        frame = new JFrame("Weekly report v" + numberVersion);
+        frame.setPreferredSize(new Dimension(400,250));
         // handle window close
         ImageIcon img = new ImageIcon(System.getProperty("user.dir") +"\\src\\main\\resources\\apple-touch-icon.png");
 
@@ -56,9 +60,22 @@ public class Window {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+
+        if(checkUpdateStatus()){
+            updateButton.setEnabled(true);
+            updateButton.setText("Update now");
+
+        fill();
+        }
+
+
+
+
+
     }
 
     private static void mainView(JPanel panel) {
+
         panel.setLayout(null);
 
         JLabel h1 = new JLabel("Enter in JIRA account");
@@ -110,14 +127,6 @@ public class Window {
 
         });
 
-//        linkText = new JTextField(20);
-//        linkText.setBounds(200, 70, 160, 25);
-//        linkText.setToolTipText("Нужна ссылка откуда пиздить подписоту!!");
-//        panel.add(linkText);
-
-//        btnBrowse.setBounds(140, 190, 100, 25);
-//        panel.add(btnBrowse);
-//        btnBrowse.addActionListener(new View.Window.ActionListenerSaveReport());
 
 
         loginButton.setBounds(10, 120, 80, 25);
@@ -125,28 +134,88 @@ public class Window {
         loginButton.addActionListener(new Window.LoginPressed());
 
         updateButton.setBounds(125, 120, 120, 25);
+        updateButton.setEnabled(false);
         panel.add(updateButton);
         updateButton.addActionListener(new Window.UpdateChecker());
+
+        installUpdate.setBounds(125, 120, 120, 25);
+        installUpdate.setVisible(false);
+        panel.add(installUpdate);
+        installUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().open(new File(System.getProperty("user.dir") + "\\WeeklyReport_v" + (numberVersion+1) + ".exe"));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+
 
         exitButton.setBounds(280, 120, 80, 25);
         panel.add(exitButton);
         exitButton.addActionListener(new Window.ExitActionListener());
 
+        j = new JProgressBar(0,DownloadWithBar.getSize());
+        j.setBounds(10, 150, 360, 25);
+        j.setMinimum(0);
+        j.setMaximum(100);
+        j.setStringPainted(true);
+        panel.add(j);
+
+
+
+
+
+//        j.setValue(downloadWithBar.getDownloaded());
+
     }
 
-    public static class KeyPressedInPassword implements EventListener {
+    public static boolean checkUpdateStatus() throws IOException {
+        if(Settings.checkUpdate()){
+            return true;
+        }
+        return false;
+    }
 
-        public void actionPerformed(KeyEvent e) {
-            if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-                frame.dispose();
-                try {
-                    BaseTest.createReport();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+    public static void fill() {
+
+        int i = 0;
+        try {
+
+
+            while (i <= 100) {
+                // fill the menu bar
+                j.setValue(i);
+
+                // delay the thread
+                Thread.sleep(1000);
+                i = (int) DownloadWithBar.getProgress();
+                if(i==100){
+                    updateButton.setVisible(false);
+                    installUpdate.setVisible(true);
                 }
             }
+        } catch (Exception e) {
+            System.out.println("catch v fill");
         }
     }
+
+//    public static class KeyPressedInPassword implements EventListener {
+//
+//        public void actionPerformed(KeyEvent e) {
+//            if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+//                frame.dispose();
+//                try {
+//                    BaseTest.createReport();
+//                } catch (IOException ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
 
     public static class LoginPressed implements ActionListener {
@@ -181,15 +250,21 @@ public class Window {
 
     public static class UpdateChecker implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            try {
-                Settings.checkUpdate();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            if (updateButton.getModel().isArmed()) {
+                try {
+                    DownloadWithBar downloadWithBar = new DownloadWithBar(new URL("https://github.com/or1k/WeeklyReport/releases/download/" + (numberVersion+1) + "/WeeklyReport_v2.exe"));
+//                        updateButton.setText("Downloading");
+                    if (DownloadWithBar.getStatus() == 0) {
+                        updateButton.setText("Dowloading");
+                    }
+                    updateButton.setEnabled(false);
+                } catch (MalformedURLException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }
 
-//
 
     public static class ExitActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
