@@ -25,5 +25,6 @@ public class Testtest{
         LoginPage loginPage = open("https://maxiproject.atlassian.net", LoginPage.class);
         ReportPage reportPage = loginPage.login();
         reportPage.getReportWithTitle();
+        reportPage.openReport();
     }
 }

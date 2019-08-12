@@ -7,12 +7,16 @@ import com.codeborne.selenide.SelenideElement;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.openqa.selenium.By;
+
+import java.awt.*;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+import static View.Window.numberVersion;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ReportPage {
@@ -91,6 +95,17 @@ public class ReportPage {
         int h = t / 60;
         int m = t % 60;
         return String.format("%d:%02d", h, m);
+    }
+
+    public void openReport(){
+        File a = new File(System.getProperty("user.dir") + "\\WeeklyReport.txt");
+        if(a.exists() && a.isFile()) {
+            try {
+                Desktop.getDesktop().open(new File(System.getProperty("user.dir") + "\\WeeklyReport.txt"));
+            } catch (Exception ex) {
+
+            }
+        }
     }
 
 
