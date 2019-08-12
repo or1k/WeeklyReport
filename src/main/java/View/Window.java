@@ -6,6 +6,7 @@ import DownloadUtils.DownloadWithBar;
 import Utils.Settings;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -19,10 +20,10 @@ public class Window {
     public static JTextField userText;
     public static JPasswordField passwordText;
     public static JProgressBar j ;
-    public static JButton loginButton = new JButton("login");
+    public static JButton loginButton = new JButton("Login");
     public static JButton installUpdate = new JButton("Install update?");
     public static JButton updateButton = new JButton("No update now");
-    public static JButton exitButton = new JButton("exit");
+    public static JButton exitButton = new JButton("Exit");
     public static JLabel userLabel = new JLabel("Email");
     public static JLabel passwordLabel = new JLabel("Password");
     public static int numberVersion = 3;
@@ -33,6 +34,7 @@ public class Window {
     public static void main(String[] args) throws IOException {
         frame = new JFrame("Weekly report v" + numberVersion);
         frame.setPreferredSize(new Dimension(400,250));
+
         // handle window close
         ImageIcon img = new ImageIcon(System.getProperty("user.dir") +"\\src\\main\\resources\\apple-touch-icon.png");
 
@@ -47,16 +49,18 @@ public class Window {
         // set up panels with buttons
 
         JPanel panel1 = new JPanel();
+        panel1.setBackground(new Color(31,29,42));
         mainView(panel1);
 
 
         // display
-
+        frame.getContentPane().setBackground(Color.red);
         frame.getContentPane().add(panel1);
         frame.setIconImage(img.getImage());
         frame.pack();
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+
         frame.setVisible(true);
 
         //Check Update, if have - updateButton Enable. Else - Disable
@@ -74,15 +78,19 @@ public class Window {
     }
 
     private static void mainView(JPanel panel) {
+//        Enter in JIRA account
 
         panel.setLayout(null);
 
-        JLabel h1 = new JLabel("Enter in JIRA account");
+
+
+        JLabel h1 = new JLabel("<html> <font color='#ffffff'>Enter in</font> <font color='#ffa800'>JIRA account</font></html>");
         h1.setBounds(120,10,150,25);
         panel.add(h1);
 
 
         userLabel.setBounds(10, 50, 80, 25);
+        userLabel.setForeground(Color.WHITE);
         panel.add(userLabel);
 
         userText = new JTextField(20);
@@ -96,6 +104,7 @@ public class Window {
 
 
         passwordLabel.setBounds(10, 80, 80, 25);
+        passwordLabel.setForeground(Color.WHITE);
         panel.add(passwordLabel);
 
         passwordText = new JPasswordField(20);
@@ -123,21 +132,23 @@ public class Window {
             public void keyReleased(KeyEvent e) {
                 //Do Nothing
             }
-
         });
 
 
 
         loginButton.setBounds(10, 120, 80, 25);
+        loginButton.setBorder(new LineBorder(new Color(255,158,0)));
         panel.add(loginButton);
         loginButton.addActionListener(new Window.LoginPressed());
 
         updateButton.setBounds(125, 120, 120, 25);
+        updateButton.setBorder(new LineBorder(new Color(255,158,0)));
         updateButton.setEnabled(false);
         panel.add(updateButton);
         updateButton.addActionListener(new Window.UpdateChecker());
 
         installUpdate.setBounds(125, 120, 120, 25);
+        installUpdate.setBorder(new LineBorder(new Color(255,158,0)));
         installUpdate.setVisible(false);
         panel.add(installUpdate);
         installUpdate.addActionListener(e -> {
@@ -151,10 +162,12 @@ public class Window {
 
 
         exitButton.setBounds(280, 120, 80, 25);
+        exitButton.setBorder(new LineBorder(new Color(255,158,0)));
         panel.add(exitButton);
         exitButton.addActionListener(new Window.ExitActionListener());
 
         j = new JProgressBar(0,DownloadWithBar.getSize());
+        j.setBorder(new LineBorder(new Color(255,158,0)));
         j.setBounds(10, 150, 360, 25);
         j.setMinimum(0);
         j.setMaximum(100);
