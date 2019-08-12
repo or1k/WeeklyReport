@@ -21,6 +21,7 @@ public class Window {
     public static JPasswordField passwordText;
     public static JProgressBar j ;
     public static JButton loginButton = new JButton("Login");
+    public static JLabel help;
     public static JButton installUpdate = new JButton("Install update?");
     public static JButton updateButton = new JButton("No update now");
     public static JButton exitButton = new JButton("Exit");
@@ -88,13 +89,27 @@ public class Window {
         h1.setBounds(120,10,150,25);
         panel.add(h1);
 
+        help = new JLabel("?");
+        help.setBounds(360, 10, 15, 15);
+        help.setForeground(Color.WHITE);
+        panel.add(help);
+        help.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(loginButton, "*Запускать от имени админа." +
+                        "\n*Отчет сохраняется в корневой папки с программой." +
+                        "\n*Кнопка обновления появится если будет новое актуальное обновление.");
+            }
+        });
+
 
         userLabel.setBounds(10, 50, 80, 25);
         userLabel.setForeground(Color.WHITE);
         panel.add(userLabel);
 
         userText = new JTextField(20);
-        userText.setBounds(200, 50, 160, 25);
+        userText.setBounds(180, 50, 180, 25);
         panel.add(userText);
         try {
             userText.setText(Settings.profile());
@@ -108,7 +123,7 @@ public class Window {
         panel.add(passwordLabel);
 
         passwordText = new JPasswordField(20);
-        passwordText.setBounds(200, 80, 160, 25);
+        passwordText.setBounds(180, 80, 180, 25);
         panel.add(passwordText);
         passwordText.addKeyListener(new KeyListener(){
             @Override
