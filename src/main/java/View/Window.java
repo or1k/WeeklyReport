@@ -59,7 +59,7 @@ public class Window {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-
+        //Check Update, if have - updateButton Enable. Else - Disable
         if(checkUpdateStatus()){
             updateButton.setEnabled(true);
             updateButton.setText("Update now");
@@ -140,14 +140,11 @@ public class Window {
         installUpdate.setBounds(125, 120, 120, 25);
         installUpdate.setVisible(false);
         panel.add(installUpdate);
-        installUpdate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Desktop.getDesktop().open(new File(System.getProperty("user.dir") + "\\WeeklyReport_v" + (numberVersion+1) + ".exe"));
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+        installUpdate.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().open(new File(System.getProperty("user.dir") + "\\WeeklyReport_v" + (numberVersion+1) + ".exe"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         });
 
@@ -165,11 +162,6 @@ public class Window {
         panel.add(j);
 
 
-
-
-
-//        j.setValue(downloadWithBar.getDownloaded());
-
     }
 
     public static boolean checkUpdateStatus() throws IOException {
@@ -180,11 +172,8 @@ public class Window {
     }
 
     public static void fill() {
-
         int i = 0;
         try {
-
-
             while (i <= 100) {
                 // fill the menu bar
                 j.setValue(i);
@@ -202,19 +191,6 @@ public class Window {
         }
     }
 
-//    public static class KeyPressedInPassword implements EventListener {
-//
-//        public void actionPerformed(KeyEvent e) {
-//            if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-//                frame.dispose();
-//                try {
-//                    BaseTest.createReport();
-//                } catch (IOException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        }
-//    }
 
 
     public static class LoginPressed implements ActionListener {

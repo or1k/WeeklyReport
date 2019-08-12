@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 @Report
 @Listeners(TextReport.class)
-public class Testtest{
+public class CreateReport {
 
 
     @Test

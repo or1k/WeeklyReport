@@ -24,7 +24,7 @@ public class BaseTest {
         Configuration.startMaximized = true;
         Configuration.holdBrowserOpen = false;
         Configuration.timeout = 10000;
-        Testtest.reportCreate();
+        CreateReport.reportCreate();
 
     }
 
