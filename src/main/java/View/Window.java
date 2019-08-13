@@ -153,17 +153,30 @@ public class Window {
 
         loginButton.setBounds(10, 120, 80, 25);
         loginButton.setBorder(new LineBorder(new Color(255,158,0)));
+
+        loginButton.setFocusPainted(false);
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setBackground(new Color(255,158,0));
+        loginButton.setFont(new Font("Roboto Mono", Font.PLAIN, 14));
         panel.add(loginButton);
         loginButton.addActionListener(new Window.LoginPressed());
 
         updateButton.setBounds(125, 120, 120, 25);
         updateButton.setBorder(new LineBorder(new Color(255,158,0)));
+        updateButton.setFocusPainted(false);
+        updateButton.setForeground(Color.WHITE);
+        updateButton.setBackground(new Color(255,158,0));
+        updateButton.setFont(new Font("Roboto Mono", Font.PLAIN, 14));
         updateButton.setEnabled(false);
         panel.add(updateButton);
         updateButton.addActionListener(new Window.UpdateChecker());
 
         installUpdate.setBounds(125, 120, 120, 25);
         installUpdate.setBorder(new LineBorder(new Color(255,158,0)));
+        installUpdate.setFocusPainted(false);
+        installUpdate.setForeground(Color.WHITE);
+        installUpdate.setBackground(new Color(255,158,0));
+        installUpdate.setFont(new Font("Roboto Mono", Font.PLAIN, 14));
         installUpdate.setVisible(false);
         panel.add(installUpdate);
         installUpdate.addActionListener(e -> {
@@ -178,6 +191,10 @@ public class Window {
 
         exitButton.setBounds(280, 120, 80, 25);
         exitButton.setBorder(new LineBorder(new Color(255,158,0)));
+        exitButton.setFocusPainted(false);
+        exitButton.setForeground(Color.WHITE);
+        exitButton.setBackground(new Color(255,158,0));
+        exitButton.setFont(new Font("Roboto Mono", Font.PLAIN, 14));
         panel.add(exitButton);
         exitButton.addActionListener(new Window.ExitActionListener());
 
