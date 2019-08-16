@@ -272,10 +272,10 @@ public class Window {
         public void actionPerformed(ActionEvent e) {
             if (updateButton.getModel().isArmed()) {
                 try {
-                    DownloadWithBar downloadWithBar = new DownloadWithBar(new URL("https://github.com/or1k/WeeklyReport/releases/download/" + (numberVersion+1) + "/WeeklyReport_v" + (numberVersion+1) + ".exe"));
+                    DownloadWithBar downloadWithBar = new DownloadWithBar(new URL("https://github.com/or1k/WeeklyReport/releases/download/" + (numberVersion+1) + "/WeeklyReport_installer.exe"));
 //                        updateButton.setText("Downloading");
                     if (DownloadWithBar.getStatus() == 0) {
-                        updateButton.setText("Dowloading");
+                        updateButton.setText("Downloading");
                     }
                     updateButton.setEnabled(false);
                 } catch (MalformedURLException ex) {
