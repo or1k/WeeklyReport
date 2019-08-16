@@ -29,6 +29,13 @@ public class Settings {
         return null;
     }
 
+    public static void deleteV2(){
+        File v2 = new File(System.getProperty("user.dir") + "/WeeklyReport_v2.jar");
+        if(v2.exists() && v2.isFile()) {
+            v2.delete();
+        }
+    }
+
     public static void saveLogin() throws IOException {
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(System.getProperty("user.dir") + "/profile/users.txt", false), StandardCharsets.UTF_8);
         writer.write(Window.userText.getText());
