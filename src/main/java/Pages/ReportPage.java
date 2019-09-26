@@ -22,7 +22,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class ReportPage {
 
     private String urlMyWork = "https://maxiproject.atlassian.net/plugins/servlet/ac/is.origo.jira.tempo-plugin/tempo-my-work?project.key=FE1";
-    ElementsCollection numbersOfTask = $$(By.xpath("//div[@data-type = 'WORKLOG']//span[contains(@title, 'FE')]"));
+    ElementsCollection numbersOfTask = $$(By.xpath("//div[@data-type = 'WORKLOG']//span[contains(@title, 'F')]"));
     ElementsCollection titleTask = $$(By.xpath("//*[@data-type=\"WORKLOG\"]/div[1]/div[1]"));
     SelenideElement totalTime = $(By.xpath("//*[@id=\"tempo-container\"]/div/div/div[2]/div[2]/div[2]/div/div/div[2]"));
 
