@@ -27,7 +27,7 @@ public class Window {
     public static JButton exitButton = new JButton("Exit");
     public static JLabel userLabel = new JLabel("Email");
     public static JLabel passwordLabel = new JLabel("Password");
-    public static int numberVersion = 4;
+    public static int numberVersion = 5;
 
     public static JFrame frame;
 
