@@ -21,8 +21,8 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class ReportPage {
 
-    private String urlMyWork = "https://maxiproject.atlassian.net/plugins/servlet/ac/is.origo.jira.tempo-plugin/tempo-my-work?project.key=FE1";
-    ElementsCollection numbersOfTask = $$(By.xpath("//div[@data-type = 'WORKLOG']//span[contains(@title, 'F')]"));
+    private String urlMyWork = "https://maxiproject.atlassian.net/plugins/servlet/ac/is.origo.jira.tempo-plugin/tempo-my-work";
+    ElementsCollection numbersOfTask = $$(By.xpath("//div[@data-type = 'WORKLOG']//span[@title]"));
     ElementsCollection titleTask = $$(By.xpath("//*[@data-type=\"WORKLOG\"]/div[1]/div[1]"));
     SelenideElement totalTime = $(By.xpath("//*[@id=\"tempo-container\"]/div/div/div[2]/div[2]/div[2]/div/div/div[2]"));
 
@@ -37,15 +37,14 @@ public class ReportPage {
             switchTo().frame(0);
             $(By.xpath("//button[contains(text(), 'Submit period')]")).waitUntil(Condition.visible, 10000);
         }
-        sleep(1500);
-
+        sleep(2500);
 
 
         Map<String, String> m = new HashMap<String, String>();
 
 
         for(int i=0;i<numbersOfTask.size();i++){
-            m.put(numbersOfTask.get(i).getText(), titleTask.get(i).getAttribute("title"));
+            m.put(numbersOfTask.get(i).getAttribute("title"), titleTask.get(i).getAttribute("title"));
 
         }
 
